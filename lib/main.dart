@@ -1,64 +1,103 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  final _messangerKey = GlobalKey<ScaffoldMessengerState>();
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      scaffoldMessengerKey: _messangerKey,
+      title: 'Flutter SimpleDialog',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: MyHomePage(messangerKey: _messangerKey),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required this.messangerKey}) : super(key: key);
-
-  final messangerKey;
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    //
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  var _selected = "Selected Option will be displayed here.";
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Snackbar test'),
+        title: const Text("Flutter SimpleDialog"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Press the floating button to see the snackbar:',
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  _showDialog(context);
+                },
+                child: const Text("Show Dialog"),
+              ),
             ),
-            Text(
-              ':)',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Text(_selected)
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Text('Press'),
-        onPressed: () {
-          messangerKey.currentState.showSnackBar(
-            const SnackBar(
-              duration: Duration(seconds: 2),
-              content: Text('A SnackBar has been shown.'),
-            ),
-          );
-        },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  _showDialog(BuildContext context) async {
+    _selected = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Expanded(
+          child: SimpleDialog(
+            title: const Text('Choose Options'),
+            elevation: 10,
+            children: [
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, 'Yes');
+                },
+                child: const Text(
+                  'Yes',
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, 'No');
+                },
+                child: const Text(
+                  'No',
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+            //backgroundColor: Colors.green,
+          ),
+        );
+      },
+    );
+
+    setState(() {
+      _selected = _selected;
+    });
   }
 }
