@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Horizontal Products';
+    const title = 'ListTile Explained';
 
     return MaterialApp(
       title: title,
@@ -15,44 +15,65 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 20.0),
-          height: 300.0,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              SizedBox(
-                width: 160.0,
-                child: Image.network(
+        body: ListView(
+          children: <Widget>[
+            const Card(
+              child: ListTile(
+                title: Text('A ListTile only with Title'),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: Image.network(
                   'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
                 ),
+                title: const Text('A ListTile only with Title and leading'),
               ),
-              SizedBox(
-                width: 160.0,
-                child: Image.network(
-                  'https://cdn.pixabay.com/photo/2015/02/07/20/58/tv-627876_960_720.jpg',
+            ),
+            const Card(
+              child: ListTile(
+                title: Text('A ListTile only with Title and trailing'),
+                trailing: Icon(Icons.attach_email),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: Image.network(
+                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
                 ),
+                title: const Text(
+                    'A ListTile only with Title and leading and trailing'),
+                trailing: const Icon(Icons.more_vert),
               ),
-              SizedBox(
-                width: 160.0,
-                child: Image.network(
-                  'https://cdn.pixabay.com/photo/2016/11/14/03/19/umbrella-1822478_960_720.jpg',
+            ),
+            const Card(
+              child: ListTile(
+                title: Text('A ListTile only with Title and dense parameter'),
+                dense: true,
+              ),
+            ),
+            const Card(
+              child: ListTile(
+                leading: FlutterLogo(size: 56.0),
+                title: Text('A ListTile only with Title'),
+                subtitle:
+                    Text('A ListTile only with Subtitle, leading and trailing'),
+                trailing: Icon(Icons.cake_outlined),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: Image.network(
+                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
                 ),
+                title: const Text('A ListTile only with three lines true.'),
+                subtitle: const Text(
+                    'A sufficiently long subtitle warrants three lines. A man has a house and one day a monster visits his house.'),
+                trailing: const Icon(Icons.gamepad_rounded),
+                isThreeLine: true,
               ),
-              SizedBox(
-                width: 160.0,
-                child: Image.network(
-                  'https://cdn.pixabay.com/photo/2017/03/24/19/48/jeans-2172032_960_720.jpg',
-                ),
-              ),
-              SizedBox(
-                width: 160.0,
-                child: Image.network(
-                  'https://cdn.pixabay.com/photo/2014/08/05/10/31/waiting-410328_960_720.jpg',
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
