@@ -1,103 +1,60 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const title = 'Horizontal Products';
+
     return MaterialApp(
-      title: 'Flutter SimpleDialog',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var _selected = "Selected Option will be displayed here.";
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Flutter SimpleDialog"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  _showDialog(context);
-                },
-                child: const Text("Show Dialog"),
-              ),
-            ),
-            Text(_selected)
-          ],
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
         ),
-      ),
-    );
-  }
-
-  _showDialog(BuildContext context) async {
-    _selected = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Expanded(
-          child: SimpleDialog(
-            title: const Text('Choose Options'),
-            elevation: 10,
-            children: [
-              SimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, 'Yes');
-                },
-                child: const Text(
-                  'Yes',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(vertical: 20.0),
+          height: 300.0,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              SizedBox(
+                width: 160.0,
+                child: Image.network(
+                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
                 ),
               ),
-              SimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, 'No');
-                },
-                child: const Text(
-                  'No',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+              SizedBox(
+                width: 160.0,
+                child: Image.network(
+                  'https://cdn.pixabay.com/photo/2015/02/07/20/58/tv-627876_960_720.jpg',
+                ),
+              ),
+              SizedBox(
+                width: 160.0,
+                child: Image.network(
+                  'https://cdn.pixabay.com/photo/2016/11/14/03/19/umbrella-1822478_960_720.jpg',
+                ),
+              ),
+              SizedBox(
+                width: 160.0,
+                child: Image.network(
+                  'https://cdn.pixabay.com/photo/2017/03/24/19/48/jeans-2172032_960_720.jpg',
+                ),
+              ),
+              SizedBox(
+                width: 160.0,
+                child: Image.network(
+                  'https://cdn.pixabay.com/photo/2014/08/05/10/31/waiting-410328_960_720.jpg',
                 ),
               ),
             ],
-            //backgroundColor: Colors.green,
           ),
-        );
-      },
+        ),
+      ),
     );
-
-    setState(() {
-      _selected = _selected;
-    });
   }
 }
