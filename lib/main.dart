@@ -7,73 +7,91 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'ListTile Explained';
+    return const MaterialApp(
+      title: 'Text Input Example',
+      home: TextInputForm(),
+    );
+  }
+}
 
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
+/// Defining a custom Form widget where we will take the input
+/// and print them on console
+///
+class TextInputForm extends StatefulWidget {
+  const TextInputForm({super.key});
+
+  @override
+  State<TextInputForm> createState() => _TextInputFormState();
+}
+
+/// The role of State class is important
+/// becasue this class holds data related to the Form.
+///
+class _TextInputFormState extends State<TextInputForm> {
+  /// the text controller will retrieve the current value
+  /// of the TextField and sends signal to the listeners
+  ///
+  bool isEdited = false;
+  late TextEditingController textEditingController;
+  String textOnTheScreen = 'Text On The Screen';
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController(text: textOnTheScreen);
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Any Text'),
+      ),
+      body: Center(
+        child: editTextField(),
+      ),
+    );
+  }
+
+  Widget editTextField() {
+    if (isEdited) {
+      return Center(
+        child: Container(
+          margin: const EdgeInsets.all(20.0),
+          child: TextField(
+            onSubmitted: (submittedValue) {
+              setState(() {
+                textOnTheScreen = submittedValue;
+                isEdited = false;
+              });
+            },
+            autofocus: true,
+            controller: textEditingController,
+          ),
         ),
-        body: ListView(
-          children: <Widget>[
-            const Card(
-              child: ListTile(
-                title: Text('A ListTile only with Title'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Image.network(
-                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
-                ),
-                title: const Text('A ListTile only with Title and leading'),
-              ),
-            ),
-            const Card(
-              child: ListTile(
-                title: Text('A ListTile only with Title and trailing'),
-                trailing: Icon(Icons.attach_email),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Image.network(
-                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
-                ),
-                title: const Text(
-                    'A ListTile only with Title and leading and trailing'),
-                trailing: const Icon(Icons.more_vert),
-              ),
-            ),
-            const Card(
-              child: ListTile(
-                title: Text('A ListTile only with Title and dense parameter'),
-                dense: true,
-              ),
-            ),
-            const Card(
-              child: ListTile(
-                leading: FlutterLogo(size: 56.0),
-                title: Text('A ListTile only with Title'),
-                subtitle:
-                    Text('A ListTile only with Subtitle, leading and trailing'),
-                trailing: Icon(Icons.cake_outlined),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Image.network(
-                  'https://cdn.pixabay.com/photo/2015/12/13/16/02/ios-1091302_960_720.jpg',
-                ),
-                title: const Text('A ListTile only with three lines true.'),
-                subtitle: const Text(
-                    'A sufficiently long subtitle warrants three lines. A man has a house and one day a monster visits his house.'),
-                trailing: const Icon(Icons.gamepad_rounded),
-                isThreeLine: true,
-              ),
-            ),
-          ],
+      );
+    }
+    return InkWell(
+      onTap: () {
+        setState(() {
+          isEdited = true;
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.all(20.0),
+        child: Text(
+          textOnTheScreen,
+          style: const TextStyle(
+            color: Colors.red,
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
