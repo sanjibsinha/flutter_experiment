@@ -1,93 +1,97 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Text Input Example',
-      home: TextInputForm(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.indigo,
+          title: const Text('First Page'),
+        ),
+        body: const FirstPage(),
+      ),
     );
   }
 }
 
-/// Defining a custom Form widget where we will take the input
-/// and print them on console
-///
-class TextInputForm extends StatefulWidget {
-  const TextInputForm({super.key});
+class FirstPage extends StatelessWidget {
+  const FirstPage({Key? key}) : super(key: key);
 
   @override
-  State<TextInputForm> createState() => _TextInputFormState();
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(20.0),
+      child: Center(
+          child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+        ),
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const SecondPage(),
+          ),
+        ),
+        child: const Text(
+          'Move to Second Page',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      )),
+    );
+  }
 }
 
-/// The role of State class is important
-/// becasue this class holds data related to the Form.
-///
-class _TextInputFormState extends State<TextInputForm> {
-  /// the text controller will retrieve the current value
-  /// of the TextField and sends signal to the listeners
-  ///
-  bool isEdited = false;
-  late TextEditingController textEditingController;
-  String textOnTheScreen = 'Text On The Screen';
+class SecondPage extends StatefulWidget {
+  const SecondPage({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-    textEditingController = TextEditingController(text: textOnTheScreen);
-  }
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  TextEditingController textEditingController = TextEditingController();
 
   @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Any Text'),
+        title: const Text('Second Page'),
+        backgroundColor: Colors.red.shade300,
       ),
-      body: Center(
-        child: isEdited
-            ? Center(
-                child: Container(
-                  margin: const EdgeInsets.all(20.0),
-                  child: TextField(
-                    onSubmitted: (submittedValue) {
-                      setState(() {
-                        textOnTheScreen = submittedValue;
-                        isEdited = false;
-                      });
-                    },
-                    autofocus: true,
-                    controller: textEditingController,
-                  ),
-                ),
-              )
-            : InkWell(
-                onTap: () {
-                  setState(() {
-                    isEdited = true;
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.all(20.0),
-                  child: Text(
-                    textOnTheScreen,
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+      body: Container(
+        margin: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Container(
+              margin: const EdgeInsets.all(20.0),
+              child: const Text(
+                'State of The Object Changed.',
+                style: TextStyle(
+                  fontSize: 50.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
+          ),
+        ),
       ),
     );
   }
