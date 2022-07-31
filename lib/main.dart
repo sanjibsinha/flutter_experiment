@@ -54,45 +54,40 @@ class _TextInputFormState extends State<TextInputForm> {
         title: const Text('Edit Any Text'),
       ),
       body: Center(
-        child: editTextField(),
-      ),
-    );
-  }
-
-  Widget editTextField() {
-    if (isEdited) {
-      return Center(
-        child: Container(
-          margin: const EdgeInsets.all(20.0),
-          child: TextField(
-            onSubmitted: (submittedValue) {
-              setState(() {
-                textOnTheScreen = submittedValue;
-                isEdited = false;
-              });
-            },
-            autofocus: true,
-            controller: textEditingController,
-          ),
-        ),
-      );
-    }
-    return InkWell(
-      onTap: () {
-        setState(() {
-          isEdited = true;
-        });
-      },
-      child: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: Text(
-          textOnTheScreen,
-          style: const TextStyle(
-            color: Colors.red,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: isEdited
+            ? Center(
+                child: Container(
+                  margin: const EdgeInsets.all(20.0),
+                  child: TextField(
+                    onSubmitted: (submittedValue) {
+                      setState(() {
+                        textOnTheScreen = submittedValue;
+                        isEdited = false;
+                      });
+                    },
+                    autofocus: true,
+                    controller: textEditingController,
+                  ),
+                ),
+              )
+            : InkWell(
+                onTap: () {
+                  setState(() {
+                    isEdited = true;
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.all(20.0),
+                  child: Text(
+                    textOnTheScreen,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
       ),
     );
   }
