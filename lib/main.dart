@@ -1,95 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      showSemanticsDebugger: true,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.indigo,
-          title: const Text('First Page'),
+          title: const Text("Container example"),
         ),
-        body: const FirstPage(),
-      ),
-    );
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(20.0),
-      child: Center(
-          child: TextButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
-        ),
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const SecondPage(),
-          ),
-        ),
-        child: const Text(
-          'Move to Second Page',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      )),
-    );
-  }
-}
-
-class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key}) : super(key: key);
-
-  @override
-  State<SecondPage> createState() => _SecondPageState();
-}
-
-class _SecondPageState extends State<SecondPage> {
-  TextEditingController textEditingController = TextEditingController();
-
-  @override
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Page'),
-        backgroundColor: Colors.red.shade300,
-      ),
-      body: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Container(
-              margin: const EdgeInsets.all(20.0),
-              child: const Text(
-                'State of The Object Changed.',
-                style: TextStyle(
-                  fontSize: 50.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+        body: Container(
+          height: 200,
+          width: double.infinity,
+          color: Colors.red.shade200,
+          alignment: Alignment.center,
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(30),
+          transform: Matrix4.rotationZ(0.10),
+          child: Text(
+            'Child Text Inside Container',
+            style: GoogleFonts.alike(
+              textStyle: Theme.of(context).textTheme.displayMedium,
             ),
           ),
         ),
