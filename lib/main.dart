@@ -12,7 +12,9 @@ class GFGapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App Example',
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      //theme: ThemeData(primarySwatch: Colors.indigo),
+      /// nothing happens
+      ///
       darkTheme: ThemeData(primarySwatch: Colors.blueGrey),
       color: Colors.amberAccent,
       supportedLocales: {const Locale('en', ' ')},
