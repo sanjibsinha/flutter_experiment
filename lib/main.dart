@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // function to trigger app build
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(title: appTitle),
     ); // MaterialApp
   }
@@ -26,7 +28,29 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title), backgroundColor: Colors.redAccent),
+      appBar: AppBar(
+        title: const Text('AppBar Example'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.comment),
+            tooltip: 'Comment Icon',
+            onPressed: () {},
+          ), //IconButton
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Setting Icon',
+            onPressed: () {},
+          ), //IconButton
+        ], //<Widget>[]
+        backgroundColor: Colors.red[400],
+        elevation: 50.0,
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          tooltip: 'Menu Icon',
+          onPressed: () {},
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+      ), //AppBar
       body: Center(
           child: Container(
         margin: const EdgeInsets.all(20.0),
