@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  final appTitle = 'Flutter Drawer Example';
+  final appTitle = 'Flutter RichText Example';
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AppBar Example'),
+        title: const Text('Flutter RichText Example'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.comment),
@@ -52,16 +52,44 @@ class MyHomePage extends StatelessWidget {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ), //AppBar
       body: Center(
-          child: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: Text(
-          'Home Page. We cannot see a drawer unless we click.',
-          style: GoogleFonts.salsa(
-            fontSize: 50.0,
-            fontWeight: FontWeight.bold,
+        child: Container(
+          margin: const EdgeInsets.all(20.00),
+          child: RichText(
+            // Controls visual overflow
+            overflow: TextOverflow.clip,
+
+            // Controls how the text should be aligned horizontally
+            textAlign: TextAlign.end,
+
+            // Control the text direction
+            textDirection: TextDirection.rtl,
+
+            // Whether the text should break at soft line breaks
+            softWrap: true,
+
+            // Maximum number of lines for the text to span
+            maxLines: 1,
+
+            // The number of font pixels for each logical pixel
+            textScaleFactor: 1,
+            text: TextSpan(
+              text: 'Hello ',
+              style: GoogleFonts.cabinSketch(
+                fontSize: 50.00,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'RichText',
+                  style: GoogleFonts.salsa(
+                    fontSize: 50.00,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      )),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: const EdgeInsets.all(0),
