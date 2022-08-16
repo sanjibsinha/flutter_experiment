@@ -55,22 +55,11 @@ class MyHomePage extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(20.00),
           child: RichText(
-            // Controls visual overflow
             overflow: TextOverflow.clip,
-
-            // Controls how the text should be aligned horizontally
             textAlign: TextAlign.end,
-
-            // Control the text direction
             textDirection: TextDirection.rtl,
-
-            // Whether the text should break at soft line breaks
             softWrap: true,
-
-            // Maximum number of lines for the text to span
             maxLines: 1,
-
-            // The number of font pixels for each logical pixel
             textScaleFactor: 1,
             text: TextSpan(
               text: 'Hello ',
