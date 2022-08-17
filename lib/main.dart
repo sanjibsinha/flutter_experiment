@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,10 +21,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   final String title;
 
   const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late LongPressGestureRecognizer _longPressRecognizer;
+
+  @override
+  void initState() {
+    super.initState();
+    _longPressRecognizer = LongPressGestureRecognizer()
+      ..onLongPress = _handlePress;
+  }
+
+  @override
+  void dispose() {
+    _longPressRecognizer.dispose();
+    super.dispose();
+  }
+
+  void _handlePress() {
+    HapticFeedback.vibrate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,106 +77,34 @@ class MyHomePage extends StatelessWidget {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ), //AppBar
       body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(20.00),
-          child: RichText(
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.end,
-            textDirection: TextDirection.rtl,
-            softWrap: true,
-            maxLines: 1,
-            textScaleFactor: 1,
-            text: TextSpan(
-              text: 'Hello ',
-              style: GoogleFonts.cabinSketch(
-                fontSize: 50.00,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'RichText',
-                  style: GoogleFonts.salsa(
-                    fontSize: 50.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+        child: Text.rich(
+          TextSpan(
+            text: 'Do you ',
+            style: GoogleFonts.salsa(
+              color: Colors.indigo,
+              fontSize: 30.00,
+              fontWeight: FontWeight.bold,
             ),
+            children: <InlineSpan>[
+              TextSpan(
+                text: 'know my',
+                style: const TextStyle(
+                  fontSize: 50.00,
+                  color: Colors.redAccent,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.wavy,
+                ),
+                recognizer: _longPressRecognizer,
+                mouseCursor: SystemMouseCursors.precise,
+              ),
+              const TextSpan(
+                text: ' Name?',
+              ),
+            ],
           ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: const EdgeInsets.all(0),
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.redAccent,
-              ), //BoxDecoration
-              child: UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(color: Colors.redAccent),
-                accountName: const Text(
-                  'John Smith',
-                  style: TextStyle(fontSize: 18),
-                ),
-                accountEmail: const Text("js123@gmail.com"),
-                currentAccountPictureSize: const Size.square(50),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  child: Text(
-                    "JS",
-                    style: GoogleFonts.aldrich(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text(' Home '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text(' About '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.workspace_premium),
-              title: const Text(' Contact '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.video_label),
-              title: const Text(' Privacy Policy '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.edit),
-              title: const Text(' Terms and Conditions '),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('LogOut'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ), //Deawer
+      //Deawer
     );
   }
 }
