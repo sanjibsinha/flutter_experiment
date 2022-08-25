@@ -35,11 +35,22 @@ class PageOne extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const PageTwo()),
             );
           },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+                }
+                return null; // Use the component's default.
+              },
+            ),
+          ),
           child: Text(
             'Page One',
             style: GoogleFonts.salsa(
-              fontStyle: FontStyle.italic,
               fontSize: 60.00,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
@@ -58,7 +69,7 @@ class PageTwo extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Page Two'),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(Icons.arrow_back, color: Colors.amber),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
@@ -66,8 +77,9 @@ class PageTwo extends StatelessWidget {
           child: Text(
             'Page Two',
             style: GoogleFonts.salsa(
-              fontStyle: FontStyle.italic,
               fontSize: 60.00,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
@@ -79,7 +91,7 @@ class PageTwo extends StatelessWidget {
   }
 }
 
-Future<T?> pushPage<T>(BuildContext context, Widget page) {
+/* Future<T?> pushPage<T>(BuildContext context, Widget page) {
   return Navigator.of(context)
       .push<T>(MaterialPageRoute(builder: (context) => page));
-}
+} */
