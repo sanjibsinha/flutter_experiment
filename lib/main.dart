@@ -1,97 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static const String _title = 'Flutter Expanded';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BackButton Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
+    return const MaterialApp(
+      title: _title,
+      home: MyHomePage(
+        title: _title,
       ),
-      home: const PageOne(),
     );
   }
 }
 
-class PageOne extends StatelessWidget {
-  const PageOne({Key? key}) : super(key: key);
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Page One'),
+        title: Text(title),
       ),
       body: Center(
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PageTwo()),
-            );
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.pressed)) {
-                  return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                }
-                return null; // Use the component's default.
-              },
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.purple,
+              height: 80,
+              width: 300,
             ),
-          ),
-          child: Text(
-            'Page One',
-            style: GoogleFonts.salsa(
-              fontSize: 60.00,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+            /* Expanded(
+              child:  */
+            Container(
+              color: Colors.green,
+              height: 500,
+              width: 180,
             ),
-          ),
+            //),
+            Container(
+              color: Colors.pink,
+              height: 80,
+              width: 250,
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-class PageTwo extends StatelessWidget {
-  const PageTwo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Page Two'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.amber),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-        body: Center(
-          child: Text(
-            'Page Two',
-            style: GoogleFonts.salsa(
-              fontSize: 60.00,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-        ),
-      ),
-      onWillPop: () async {
-        return false;
-      },
-    );
-  }
-}
-
-/* Future<T?> pushPage<T>(BuildContext context, Widget page) {
-  return Navigator.of(context)
-      .push<T>(MaterialPageRoute(builder: (context) => page));
-} */
