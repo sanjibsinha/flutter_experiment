@@ -37,14 +37,13 @@ class MyHomePage extends StatelessWidget {
               height: 80,
               width: 300,
             ),
-            /* Expanded(
-              child:  */
-            Container(
-              color: Colors.green,
-              height: 500,
-              width: 180,
+            Expanded(
+              child: Container(
+                color: Colors.green,
+                height: 500,
+                width: 180,
+              ),
             ),
-            //),
             Container(
               color: Colors.pink,
               height: 80,
