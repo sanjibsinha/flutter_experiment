@@ -30,18 +30,19 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           children: <Widget>[
             Container(
               color: Colors.purple,
               height: 80,
-              width: 300,
+              width: 100,
             ),
             Expanded(
+              flex: 1,
               child: Container(
                 color: Colors.green,
                 height: 500,
-                width: 180,
+                width: 380,
               ),
             ),
             Container(
