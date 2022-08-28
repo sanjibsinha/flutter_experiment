@@ -33,64 +33,51 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    height: 100.00,
-                    color: Colors.lightGreenAccent,
-                    child: Text(
-                      '4/9',
-                      style: GoogleFonts.sacramento(
-                        fontSize: 25.00,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Text Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    height: 100.00,
-                    color: Colors.pinkAccent,
-                    child: Text(
-                      '3/9',
-                      style: GoogleFonts.sacramento(
-                        fontSize: 25.00,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.purple,
-                    height: 100.00,
-                    child: Text(
-                      '2/9',
-                      style: GoogleFonts.sacramento(
-                        fontSize: 25.00,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             const SizedBox(
               height: 10.00,
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
-              child: Text(
-                'Total space = 4 + 3 + 2 = 9. Flex Property has divided it accordingly.',
-                style: GoogleFonts.salsa(
-                  fontSize: 55.00,
-                  fontWeight: FontWeight.bold,
+              child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.green.withOpacity(0.4);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.blue.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Text Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             )
