@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Expanded Flex Explained';
+  static const String _title = 'TextButton Explained';
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,62 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: TextButton(
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.focused)) {
+                      return Colors.red;
+                    }
+                    return null; // Defer to the widget's default.
+                  }),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Text Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.purple,
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Text Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.green,
+                  onSurface: Colors.red,
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Text Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
