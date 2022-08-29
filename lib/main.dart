@@ -35,10 +35,11 @@ class MyHomePage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(20.00),
+              color: Colors.red,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
+                      MaterialStateProperty.all<Color>(Colors.white),
                 ),
                 onPressed: () {},
                 child: Text(
@@ -55,6 +56,7 @@ class MyHomePage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
+              color: Colors.black12,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
@@ -83,6 +85,11 @@ class MyHomePage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.red,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: TextButton(
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
