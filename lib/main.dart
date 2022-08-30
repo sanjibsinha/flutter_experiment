@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'TextButton Explained';
+  static const String _title = 'ElevatedButton Explained';
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +35,19 @@ class MyHomePage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(20.00),
-              color: Colors.red,
-              child: TextButton(
+              //color: Colors.red,
+              child: ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amberAccent),
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Text Button',
+                  'Elevated Button',
                   style: GoogleFonts.salsa(
                     fontSize: 25.00,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -57,9 +58,8 @@ class MyHomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(20.00),
               color: Colors.black12,
-              child: TextButton(
+              child: ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
                       if (states.contains(MaterialState.hovered)) {
@@ -67,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                       }
                       if (states.contains(MaterialState.focused) ||
                           states.contains(MaterialState.pressed)) {
-                        return Colors.blue.withOpacity(0.12);
+                        return Colors.white.withOpacity(0.12);
                       }
                       return null; // Defer to the widget's default.
                     },
@@ -75,7 +75,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Text Button',
+                  'Elevated Button',
                   style: GoogleFonts.salsa(
                     fontSize: 25.00,
                     fontWeight: FontWeight.bold,
@@ -85,57 +85,15 @@ class MyHomePage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.red,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.focused)) {
-                      return Colors.red;
-                    }
-                    return null; // Defer to the widget's default.
-                  }),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.redAccent,
+                  shadowColor: Colors.black,
+                  elevation: 20.00,
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.purple,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.green,
-                  onSurface: Colors.red,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
+                  'Elevated Button',
                   style: GoogleFonts.salsa(
                     fontSize: 25.00,
                     fontWeight: FontWeight.bold,
