@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'ElevatedButton Explained';
+  static const String _title = 'OutlinedButton Explained';
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,9 @@ class MyHomePage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(20.00),
-              child: ElevatedButton(
+              child: OutlinedButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
+                style: OutlinedButton.styleFrom(
                   elevation: 20,
                   shadowColor: Colors.blue,
                   primary: Colors.pink,
@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Elevated Button',
+                  'Outlined Button',
                   style: GoogleFonts.salsa(
                     fontSize: 25.00,
                     fontWeight: FontWeight.bold,
@@ -62,9 +62,9 @@ class MyHomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(20.00),
               color: Colors.black12,
-              child: ElevatedButton(
+              child: OutlinedButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
+                style: OutlinedButton.styleFrom(
                   elevation: 20,
                   shadowColor: Colors.yellow,
                   primary: Colors.purple,
@@ -76,14 +76,14 @@ class MyHomePage extends StatelessWidget {
                   ),
                   //fixedSize: const Size(240, 80), primary: Colors.deepOrange),
                 ),
-                child: const Text('Elevated Button'),
+                child: const Text('Outlined Button'),
               ),
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
-              child: ElevatedButton(
+              child: OutlinedButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
+                style: OutlinedButton.styleFrom(
                   elevation: 20,
                   shadowColor: Colors.green,
                   padding:
@@ -95,9 +95,41 @@ class MyHomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                child: const Text('Elevated Button'),
+                child: const Text('Outlined Button'),
               ),
             ),
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: OutlinedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.pink[100]),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                  ),
+                  elevation: MaterialStateProperty.all(
+                    20.00,
+                  ),
+                  shadowColor: MaterialStateProperty.all(
+                    Colors.black,
+                  ),
+                  /* textStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ), */
+                ),
+                child: Text(
+                  'Outlined Button',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.pink,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
