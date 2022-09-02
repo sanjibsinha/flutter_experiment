@@ -10,9 +10,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
-      home: MyHomePage(
+      theme: ThemeData(
+        // WE can define the default brightness and colors.
+        brightness: Brightness.light,
+        primaryColor: Colors.redAccent[600],
+        appBarTheme: const AppBarTheme(
+          color: Colors.pinkAccent,
+        ),
+
+        // WE can define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: TextTheme(
+          headline1: GoogleFonts.salsa(
+            fontSize: 45.00,
+            fontWeight: FontWeight.bold,
+          ),
+          headline6: GoogleFonts.cairo(
+            fontSize: 25.00,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText2: GoogleFonts.comicNeue(
+            fontSize: 17.00,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+      home: const MyHomePage(
         title: _title,
       ),
     );
@@ -29,11 +54,22 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
         child: Column(
           children: [
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: Text(
+                'OutlinedButton Examples',
+                style: Theme.of(context).textTheme.headline1,
+              ),
+            ),
             Container(
               margin: const EdgeInsets.all(20.00),
               child: OutlinedButton(
@@ -49,10 +85,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 child: Text(
                   'Outlined Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
             ),
@@ -70,10 +103,7 @@ class MyHomePage extends StatelessWidget {
                   primary: Colors.purple,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  textStyle: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  textStyle: Theme.of(context).textTheme.headline6,
                   //fixedSize: const Size(240, 80), primary: Colors.deepOrange),
                 ),
                 child: const Text('Outlined Button'),
@@ -81,55 +111,11 @@ class MyHomePage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(20.00),
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  elevation: 20,
-                  shadowColor: Colors.green,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  fixedSize: const Size(200, 70),
-                  primary: Colors.deepPurple,
-                  textStyle: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                child: const Text('Outlined Button'),
+              child: Text(
+                'We have tried to apply the Global theme on OutlinedButton Examples.',
+                style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: OutlinedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.pink[100]),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                  ),
-                  elevation: MaterialStateProperty.all(
-                    20.00,
-                  ),
-                  shadowColor: MaterialStateProperty.all(
-                    Colors.black,
-                  ),
-                  /* textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ), */
-                ),
-                child: Text(
-                  'Outlined Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pink,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
