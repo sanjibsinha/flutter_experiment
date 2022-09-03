@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'OutlinedButton Explained';
+  static const String _title = 'Progress Indicator Explained';
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Colors.redAccent[600],
         appBarTheme: const AppBarTheme(
-          color: Colors.pinkAccent,
+          color: Colors.amberAccent,
         ),
 
         // WE can define the default `TextTheme`. Use this to specify the default
@@ -62,60 +62,25 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: Text(
-                'OutlinedButton Examples',
-                style: Theme.of(context).textTheme.headline1,
+            CircularProgressIndicator(
+              backgroundColor: Theme.of(context).backgroundColor,
+              valueColor: AlwaysStoppedAnimation(
+                Theme.of(context).appBarTheme.backgroundColor,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  elevation: 20,
-                  shadowColor: Colors.blue,
-                  primary: Colors.pink,
-                  fixedSize: const Size(300, 100),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                child: Text(
-                  'Outlined Button',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
+              strokeWidth: 10,
             ),
             const SizedBox(
-              height: 10.00,
+              height: 15,
             ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              color: Colors.black12,
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  elevation: 20,
-                  shadowColor: Colors.yellow,
-                  primary: Colors.purple,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  textStyle: Theme.of(context).textTheme.headline6,
-                  //fixedSize: const Size(240, 80), primary: Colors.deepOrange),
-                ),
-                child: const Text('Outlined Button'),
+            LinearProgressIndicator(
+              backgroundColor: Theme.of(context).backgroundColor,
+              valueColor: AlwaysStoppedAnimation(
+                Theme.of(context).appBarTheme.backgroundColor,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: Text(
-                'We have tried to apply the Global theme on OutlinedButton Examples.',
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-            ),
+              minHeight: 20,
+            )
           ],
         ),
       ),
