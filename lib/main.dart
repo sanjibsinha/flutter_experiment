@@ -61,7 +61,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double value = 0;
-  // let's change
+  // let's create a UI based on Material Theme
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,8 +117,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onPressed: () {
                   value = 0;
-                  downloadData();
-                  setState(() {});
+                  Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+                    setState(() {
+                      if (value == 2) {
+                        timer.cancel();
+                      } else {
+                        value = value + 0.1;
+                      }
+                    });
+                  });
                 },
                 child: Text(
                   "Download File",
@@ -130,17 +137,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-  }
-
-  void downloadData() {
-    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      setState(() {
-        if (value == 1) {
-          timer.cancel();
-        } else {
-          value = value + 0.1;
-        }
-      });
-    });
   }
 }
