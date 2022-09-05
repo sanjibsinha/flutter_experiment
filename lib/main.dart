@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,6 +18,9 @@ class MyApp extends StatelessWidget {
         // WE can define the default brightness and colors.
         brightness: Brightness.light,
         primaryColor: Colors.redAccent[600],
+        backgroundColor: Colors.black26,
+        cardColor: Colors.amber,
+        shadowColor: Colors.black,
         appBarTheme: const AppBarTheme(
           color: Colors.amberAccent,
         ),
@@ -24,16 +29,17 @@ class MyApp extends StatelessWidget {
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
           headline1: GoogleFonts.salsa(
-            fontSize: 45.00,
+            fontSize: 25.00,
             fontWeight: FontWeight.bold,
           ),
-          headline6: GoogleFonts.cairo(
+          headline2: GoogleFonts.cairo(
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
           ),
           bodyText2: GoogleFonts.comicNeue(
-            fontSize: 17.00,
-            fontWeight: FontWeight.normal,
+            fontSize: 25.00,
+            fontWeight: FontWeight.bold,
+            color: Colors.amber,
           ),
         ),
       ),
@@ -44,18 +50,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  // let's change
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  double value = 0;
+  // let's change
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          title,
+          widget.title,
           style: Theme.of(context).textTheme.headline6,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -64,26 +76,71 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(
-              backgroundColor: Theme.of(context).backgroundColor,
-              valueColor: AlwaysStoppedAnimation(
-                Theme.of(context).appBarTheme.backgroundColor,
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: Text(
+                'Indeterminate Progress Indicator',
+                style: Theme.of(context).textTheme.headline1,
               ),
-              strokeWidth: 10,
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            LinearProgressIndicator(
-              backgroundColor: Theme.of(context).backgroundColor,
-              valueColor: AlwaysStoppedAnimation(
-                Theme.of(context).appBarTheme.backgroundColor,
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: CircularProgressIndicator(
+                backgroundColor: Theme.of(context).backgroundColor,
+                color: Theme.of(context).cardColor,
+                strokeWidth: 15,
               ),
-              minHeight: 20,
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: Text(
+                'Determinate Progress Indicator',
+                style: Theme.of(context).textTheme.headline2,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: CircularProgressIndicator(
+                backgroundColor: Theme.of(context).backgroundColor,
+                color: Theme.of(context).cardColor,
+                strokeWidth: 15,
+                value: value,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 20.00,
+                  primary: Theme.of(context).backgroundColor,
+                  shadowColor: Theme.of(context).shadowColor,
+                ),
+                onPressed: () {
+                  value = 0;
+                  downloadData();
+                  setState(() {});
+                },
+                child: Text(
+                  "Download File",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
             )
           ],
         ),
       ),
     );
+  }
+
+  void downloadData() {
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        if (value == 1) {
+          timer.cancel();
+        } else {
+          value = value + 0.1;
+        }
+      });
+    });
   }
 }
