@@ -8,7 +8,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Progress Indicator Explained';
+  static const String _title = 'Linear Progress Indicator';
 
   @override
   Widget build(BuildContext context) {
@@ -79,31 +79,31 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               margin: const EdgeInsets.all(20),
               child: Text(
-                'Indeterminate Progress Indicator',
+                'Indeterminate Example',
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(20),
-              child: CircularProgressIndicator(
+              child: LinearProgressIndicator(
                 backgroundColor: Theme.of(context).backgroundColor,
                 color: Theme.of(context).cardColor,
-                strokeWidth: 15,
+                minHeight: 10,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(20),
               child: Text(
-                'Determinate Progress Indicator',
+                'Determinate Example',
                 style: Theme.of(context).textTheme.headline2,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(20),
-              child: CircularProgressIndicator(
+              child: LinearProgressIndicator(
                 backgroundColor: Theme.of(context).backgroundColor,
                 color: Theme.of(context).cardColor,
-                strokeWidth: 15,
+                minHeight: 10,
                 value: value,
               ),
             ),
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
                 child: Text(
-                  "Download File",
+                  'Send Data',
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
