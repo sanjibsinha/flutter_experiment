@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,8 +27,9 @@ class MyApp extends StatelessWidget {
         // WE can define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
-          headline1: GoogleFonts.salsa(
-            fontSize: 25.00,
+          headline1: const TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 35.00,
             fontWeight: FontWeight.bold,
           ),
           headline2: GoogleFonts.cairo(
@@ -117,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
               margin: const EdgeInsets.all(20),
               child: Text(
                 'Staggered GridView Example',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Container(
