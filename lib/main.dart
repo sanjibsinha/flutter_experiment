@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Staggered GridView';
+  static const String _title = 'TextStyle Height Example';
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +25,30 @@ class MyApp extends StatelessWidget {
 
         // WE can define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-          headline1: const TextStyle(
+        textTheme: const TextTheme(
+          headline1: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 35.00,
             fontWeight: FontWeight.bold,
+            height: 1.0, // 100% of actual height
           ),
-          headline2: GoogleFonts.cairo(
+          headline2: TextStyle(
+            fontFamily: 'Salsa',
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
+            height: 1.5, // 150% of actual height
           ),
-          bodyText2: GoogleFonts.comicNeue(
-            fontSize: 25.00,
+          headline3: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 20.00,
             fontWeight: FontWeight.bold,
-            color: Colors.amber,
+            height: 2.0, // 200% of actual height
+          ),
+          headline4: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 20.00,
+            fontWeight: FontWeight.bold,
+            height: 4.0, // 400% of actual height
           ),
         ),
       ),
@@ -49,43 +58,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//List of Cards with color and icon
-List<Widget> _listTile = <Widget>[
-  const FlutterLogoTile(
-    backColor: Colors.deepPurpleAccent,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.yellowAccent,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.blue,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.deepOrange,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.blueGrey,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.red,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.orange,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.white,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.pink,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.green,
-  ),
-  const FlutterLogoTile(
-    backColor: Colors.purple,
-  ),
-];
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -113,61 +85,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-              margin: const EdgeInsets.all(20),
+              margin: const EdgeInsets.all(10),
               child: Text(
-                'Staggered GridView Example',
+                'TextStyle Height Example with 100% height',
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(20),
-              child: StaggeredGrid.count(
-                crossAxisCount: 4,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4.0,
-                //StaggeredGridTiles: _cardTile,
-                children: _listTile,
+              margin: const EdgeInsets.all(10),
+              child: Text(
+                'TextStyle Height Example with 150% height',
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 20.00,
-                  primary: Theme.of(context).backgroundColor,
-                  shadowColor: Theme.of(context).shadowColor,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Send Data',
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
+              margin: const EdgeInsets.all(10),
+              child: Text(
+                'TextStyle Height Example with 200% height',
+                style: Theme.of(context).textTheme.headline3,
               ),
-            )
+            ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: Text(
+                'TextStyle Height Example with 400% height',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class FlutterLogoTile extends StatelessWidget {
-  final Color backColor;
-
-  const FlutterLogoTile({
-    Key? key,
-    required this.backColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: backColor,
-      child: const FlutterLogo(
-        size: 300,
-        textColor: Colors.blue,
-        style: FlutterLogoStyle.stacked,
-      ), //Flut
     );
   }
 }
