@@ -28,27 +28,21 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontFamily: 'Salsa',
-            fontSize: 35.00,
+            fontSize: 40.00,
             fontWeight: FontWeight.bold,
-            height: 1.0, // 100% of actual height
+            height: 4.0, // 400% of actual height
           ),
           headline2: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
-            height: 1.5, // 150% of actual height
+            height: 2.5, // 250% of actual height
           ),
           headline3: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 20.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-          ),
-          headline4: TextStyle(
-            fontFamily: 'Salsa',
-            fontSize: 20.00,
-            fontWeight: FontWeight.bold,
-            height: 4.0, // 400% of actual height
           ),
         ),
       ),
@@ -87,29 +81,22 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(
-                'TextStyle Height Example with 100% height',
+                'TextStyle Height Example with 400% height',
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(
-                'TextStyle Height Example with 150% height',
+                'TextStyle Height Example with 250% height',
                 style: Theme.of(context).textTheme.headline2,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(
-                'TextStyle Height Example with 200% height',
+                'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
                 style: Theme.of(context).textTheme.headline3,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'TextStyle Height Example with 400% height',
-                style: Theme.of(context).textTheme.headline4,
               ),
             ),
           ],
