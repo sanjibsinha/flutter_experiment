@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
 
@@ -76,30 +75,40 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'TextStyle Height Example with 400% height',
-                style: Theme.of(context).textTheme.headline1,
+        child: SelectionArea(
+          child: ListView(
+            children: [
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  'TextStyle Height Example with 400% height',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'TextStyle Height Example with 250% height',
-                style: Theme.of(context).textTheme.headline2,
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: SelectionContainer.disabled(
+                    child: Text(
+                  'TextStyle Height Example with 400% height',
+                  style: Theme.of(context).textTheme.headline1,
+                )),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                style: Theme.of(context).textTheme.headline3,
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  'TextStyle Height Example with 250% height',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               ),
-            ),
-          ],
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
