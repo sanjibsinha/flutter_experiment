@@ -81,23 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: Text(
-                  'TextStyle Height Example with 400% height',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: SelectionContainer.disabled(
-                    child: Text(
-                  'TextStyle Height Example with 400% height',
-                  style: Theme.of(context).textTheme.headline1,
-                )),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Text(
-                  'TextStyle Height Example with 250% height',
-                  style: Theme.of(context).textTheme.headline2,
+                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
               Container(
@@ -105,6 +90,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
                   style: Theme.of(context).textTheme.headline3,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: SelectionContainer.disabled(
+                  child: Text(
+                    'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
                 ),
               ),
             ],
