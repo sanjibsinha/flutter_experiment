@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'TextStyle Height Example';
+  static const String _title = 'SelectableRegion Example';
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: SelectionArea(
+        child: SelectableRegion(
+          selectionControls: materialTextSelectionControls,
+          focusNode: FocusNode(),
           child: ListView(
             children: [
               Container(
@@ -101,11 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Container(
                 margin: const EdgeInsets.all(10),
-                child: SelectionContainer.disabled(
-                  child: Text(
-                    'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
+                child: Text(
+                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
             ],
