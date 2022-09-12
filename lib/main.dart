@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'SelectableRegion Example';
+  static const String _title = 'Text Example';
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +29,22 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Salsa',
             fontSize: 40.00,
             fontWeight: FontWeight.bold,
-            height: 4.0, // 400% of actual height
+            height: 2.0, // 200% of actual height
+            color: Colors.redAccent,
           ),
           headline2: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
-            height: 2.5, // 250% of actual height
+            height: 1.5, // 150% of actual height
+            color: Colors.purpleAccent,
           ),
           headline3: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 20.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
+            color: Colors.deepOrange,
           ),
         ),
       ),
@@ -75,41 +78,43 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: SelectableRegion(
-          selectionControls: materialTextSelectionControls,
-          focusNode: FocusNode(),
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Text(
-                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                  style: Theme.of(context).textTheme.headline3,
+        child: ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(right: 13.0),
+              child: const Text(
+                'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 30.0,
+                  color: Color(0xFF212121),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
+            ),
+            Container(
                 margin: const EdgeInsets.all(10),
-                child: Text(
-                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Text(
-                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Text(
-                  'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-              ),
-            ],
-          ),
+                child: Text.rich(
+                  TextSpan(
+                    text: 'Make',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3, // default text style
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ' life ',
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                      TextSpan(
+                        text: 'beautiful',
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
+                    ],
+                  ),
+                )),
+          ],
         ),
       ),
     );
