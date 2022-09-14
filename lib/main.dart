@@ -81,34 +81,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.only(right: 13.0),
-              child: const Text(
-                'TextStyle Height Example with 200% height that will create a space between the upper and lower part.',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Color(0xFF212121),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Container(
                 margin: const EdgeInsets.all(10),
                 child: Text.rich(
                   TextSpan(
-                    text: 'Make',
+                    text: 'Say',
                     style: Theme.of(context)
                         .textTheme
                         .headline3, // default text style
                     children: <TextSpan>[
                       TextSpan(
-                        text: ' life ',
+                        text: ' NO ',
                         style: Theme.of(context).textTheme.headline2,
                       ),
                       TextSpan(
-                        text: 'beautiful',
+                        text: 'To WAR',
                         style: Theme.of(context).textTheme.headline1,
                       ),
                     ],
