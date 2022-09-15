@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontFamily: 'Salsa',
-            fontSize: 40.00,
+            fontSize: 80.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
             color: Colors.redAccent,
@@ -81,25 +81,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-                margin: const EdgeInsets.all(10),
-                child: Text.rich(
-                  TextSpan(
-                    text: 'Say',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3, // default text style
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: ' NO ',
-                        style: Theme.of(context).textTheme.headline2,
+              margin: const EdgeInsets.all(10),
+              child: Text.rich(
+                TextSpan(
+                  children: <InlineSpan>[
+                    TextSpan(
+                      text: 'Say',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    WidgetSpan(
+                      child: SizedBox(
+                        width: 120,
+                        height: 150,
+                        child: Card(
+                          child: Center(
+                            child: Text(
+                              'NO',
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ),
+                        ),
                       ),
-                      TextSpan(
-                        text: 'To WAR',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ],
-                  ),
-                )),
+                    ),
+                    TextSpan(
+                      text: 'To War',
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
