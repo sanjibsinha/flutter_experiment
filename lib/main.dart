@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -65,7 +67,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double value = 0;
+  bool image = false;
+  bool light = false;
+
   // let's create a UI based on Material Theme
   @override
   Widget build(BuildContext context) {
@@ -77,38 +81,53 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: Center(
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text.rich(
-                TextSpan(
-                  children: <InlineSpan>[
-                    TextSpan(
-                      text: 'Say',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    WidgetSpan(
-                      child: SizedBox(
-                        width: 120,
-                        height: 150,
-                        child: Card(
-                          child: Center(
-                            child: Text(
-                              'NO',
-                              style: Theme.of(context).textTheme.headline1,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'To War',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ],
+      body: Container(
+        alignment: FractionalOffset.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Icon(
+                    Icons.traffic_outlined,
+                    color: light ? Colors.red : Colors.green,
+                    size: 60,
+                  ),
                 ),
+                Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: image
+                        ? Container(
+                            padding: const EdgeInsets.all(5.00),
+                            width: 300,
+                            height: 250,
+                            child: Image.network(
+                                'https://cdn.pixabay.com/photo/2019/03/19/16/52/fantasies-4066196_960_720.jpg'),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(5.00),
+                            width: 300,
+                            height: 250,
+                            child: Image.network(
+                                'https://cdn.pixabay.com/photo/2014/09/19/20/48/cab-453028_960_720.jpg'),
+                          )),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  // Toggle light when tapped.
+                  light = !light;
+                  image = !image;
+                });
+              },
+              child: Container(
+                color: Colors.red,
+                padding: const EdgeInsets.all(8),
+                // You can walk when traffic light is red
+                child: Text(light ? 'STOP' : 'WALK'),
               ),
             ),
           ],
