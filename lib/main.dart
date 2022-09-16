@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  // Toggle light when tapped.
+                  // Toggle light and image when tapped.
                   light = !light;
                   image = !image;
                 });
