@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Orientation Example';
+  static const String _title = 'Lazy Loading Example';
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool image = false;
-  bool light = false;
+  List<int> data = [];
+  int currentLength = 0;
+
+  final int increment = 10;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    _loadMoreItems();
+    super.initState();
+  }
+
+  Future _loadMoreItems() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 4));
+    for (var i = currentLength; i <= currentLength + increment; i++) {
+      data.add(i);
+    }
+    setState(() {
+      isLoading = false;
+      currentLength = data.length;
+    });
+  }
 
   // let's create a UI based on Material Theme
   @override
@@ -79,93 +104,49 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          return GridView.count(
-            //grid with 3 and 4 columns for portrait and landscape mode respectively
-            crossAxisCount: orientation == Orientation.portrait ? 1 : 3,
-
-            // random item generator
-            children: List.generate(
-              Books.length,
-              (index) {
-                return Center(
-                  child: SelectBook(
-                    book: Books[index],
-                  ),
-                );
-              },
-            ),
-          );
-        },
+      body: LazyLoadScrollView(
+        isLoading: isLoading,
+        onEndOfPage: () => _loadMoreItems(),
+        child: ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, position) {
+            return DemoLoadingItem(position);
+          },
+        ),
       ),
     );
   }
 }
 
-class Book {
-  const Book({
-    required this.title,
-    required this.icon,
-  });
-  final String title;
-  final IconData icon;
-}
+class DemoLoadingItem extends StatelessWidget {
+  final int position;
 
-const List<Book> Books = <Book>[
-  Book(
-    title: 'Home Decor Guide',
-    icon: Icons.home,
-  ),
-  Book(
-    title: 'City Guide Map',
-    icon: Icons.map,
-  ),
-  Book(
-    title: 'Phone Directory',
-    icon: Icons.phone,
-  ),
-  Book(
-    title: 'Camera Accessories',
-    icon: Icons.camera_alt,
-  ),
-  Book(
-    title: 'Car Setting Manual',
-    icon: Icons.car_rental_outlined,
-  ),
-];
-
-class SelectBook extends StatelessWidget {
-  const SelectBook({
+  const DemoLoadingItem(
+    this.position, {
     Key? key,
-    required this.book,
   }) : super(key: key);
-  final Book book;
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle textStyle = TextStyle(
-      fontFamily: 'Lato Bold',
-      fontSize: 20,
-      color: Colors.white,
-    );
     return Card(
-      color: Colors.red,
-      child: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: Icon(
-                book.icon,
-                size: 50.0,
-                color: textStyle.color,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  color: Colors.purpleAccent,
+                  height: 40.0,
+                  width: 40.0,
+                ),
+                const SizedBox(width: 8.0),
+                Text("Item $position"),
+              ],
             ),
-            Text(
-              book.title,
-              style: textStyle,
-            ),
+            const Text('Content comimg from API'),
           ],
         ),
       ),
