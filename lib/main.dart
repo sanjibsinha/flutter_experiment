@@ -79,54 +79,92 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: Container(
-        alignment: FractionalOffset.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.traffic_outlined,
-                    color: light ? Colors.red : Colors.green,
-                    size: 60,
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          return GridView.count(
+            //grid with 3 and 4 columns for portrait and landscape mode respectively
+            crossAxisCount: orientation == Orientation.portrait ? 1 : 3,
+
+            // random item generator
+            children: List.generate(
+              Books.length,
+              (index) {
+                return Center(
+                  child: SelectBook(
+                    book: Books[index],
                   ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: image
-                        ? Container(
-                            padding: const EdgeInsets.all(5.00),
-                            width: 300,
-                            height: 250,
-                            child: Image.network(
-                                'https://cdn.pixabay.com/photo/2019/03/19/16/52/fantasies-4066196_960_720.jpg'),
-                          )
-                        : Container(
-                            padding: const EdgeInsets.all(5.00),
-                            width: 300,
-                            height: 250,
-                            child: Image.network(
-                                'https://cdn.pixabay.com/photo/2014/09/19/20/48/cab-453028_960_720.jpg'),
-                          )),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  // Toggle light and image when tapped.
-                  light = !light;
-                  image = !image;
-                });
+                );
               },
-              child: Container(
-                color: Colors.red,
-                padding: const EdgeInsets.all(8),
-                // You can walk when traffic light is red
-                child: Text(light ? 'STOP' : 'WALK'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class Book {
+  const Book({
+    required this.title,
+    required this.icon,
+  });
+  final String title;
+  final IconData icon;
+}
+
+const List<Book> Books = <Book>[
+  Book(
+    title: 'Home Decor Guide',
+    icon: Icons.home,
+  ),
+  Book(
+    title: 'City Guide Map',
+    icon: Icons.map,
+  ),
+  Book(
+    title: 'Phone Directory',
+    icon: Icons.phone,
+  ),
+  Book(
+    title: 'Camera Accessories',
+    icon: Icons.camera_alt,
+  ),
+  Book(
+    title: 'Car Setting Manual',
+    icon: Icons.car_rental_outlined,
+  ),
+];
+
+class SelectBook extends StatelessWidget {
+  const SelectBook({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
+  final Book book;
+
+  @override
+  Widget build(BuildContext context) {
+    const TextStyle textStyle = TextStyle(
+      fontFamily: 'Lato Bold',
+      fontSize: 20,
+      color: Colors.white,
+    );
+    return Card(
+      color: Colors.red,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Icon(
+                book.icon,
+                size: 50.0,
+                color: textStyle.color,
               ),
+            ),
+            Text(
+              book.title,
+              style: textStyle,
             ),
           ],
         ),
