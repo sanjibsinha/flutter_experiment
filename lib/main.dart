@@ -1,148 +1,152 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'TextButton Explained';
+  static const String _title = 'Lazy Loading Example';
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
-      home: MyHomePage(
+      theme: ThemeData(
+        // WE can define the default brightness and colors.
+        brightness: Brightness.light,
+        primaryColor: Colors.redAccent[600],
+        backgroundColor: Colors.black26,
+        cardColor: Colors.amber,
+        shadowColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          color: Colors.amberAccent,
+        ),
+
+        // WE can define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 80.00,
+            fontWeight: FontWeight.bold,
+            height: 2.0, // 200% of actual height
+            color: Colors.redAccent,
+          ),
+          headline2: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 25.00,
+            fontWeight: FontWeight.bold,
+            height: 1.5, // 150% of actual height
+            color: Colors.purpleAccent,
+          ),
+          headline3: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 20.00,
+            fontWeight: FontWeight.bold,
+            height: 2.0, // 200% of actual height
+            color: Colors.deepOrange,
+          ),
+        ),
+      ),
+      home: const MyHomePage(
         title: _title,
       ),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<int> data = [];
+  int currentLength = 0;
+
+  final int increment = 10;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    _loadMoreItems();
+    super.initState();
+  }
+
+  Future _loadMoreItems() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 4));
+    for (var i = currentLength; i <= currentLength + increment; i++) {
+      data.add(i);
+    }
+    setState(() {
+      isLoading = false;
+      currentLength = data.length;
+    });
+  }
+
+  // let's create a UI based on Material Theme
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          widget.title,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: Center(
+      body: LazyLoadScrollView(
+        isLoading: isLoading,
+        onEndOfPage: () => _loadMoreItems(),
+        child: ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, position) {
+            return DemoLoadingItem(position);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class DemoLoadingItem extends StatelessWidget {
+  final int position;
+
+  const DemoLoadingItem(
+    this.position, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              color: Colors.red,
-              child: TextButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  color: Colors.purpleAccent,
+                  height: 40.0,
+                  width: 40.0,
                 ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+                const SizedBox(width: 8.0),
+                Text("Item $position"),
+              ],
             ),
-            const SizedBox(
-              height: 10.00,
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              color: Colors.black12,
-              child: TextButton(
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return Colors.green.withOpacity(0.4);
-                      }
-                      if (states.contains(MaterialState.focused) ||
-                          states.contains(MaterialState.pressed)) {
-                        return Colors.blue.withOpacity(0.12);
-                      }
-                      return null; // Defer to the widget's default.
-                    },
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.red,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.focused)) {
-                      return Colors.red;
-                    }
-                    return null; // Defer to the widget's default.
-                  }),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.purple,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.green,
-                  onSurface: Colors.red,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Text Button',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            const Text('Content comimg from API'),
           ],
         ),
       ),
