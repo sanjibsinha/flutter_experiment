@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Material State Property Example';
+  static const String _title = 'About Dialog Example';
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +66,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    initMyLibrary();
+  }
+
   Color fetchColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
@@ -72,9 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
       MaterialState.focused,
     };
     if (states.any(interactiveStates.contains)) {
-      return Colors.yellow;
+      return Colors.redAccent;
     }
-    return Colors.lightGreen;
+    return Colors.deepPurple;
+  }
+
+  void initMyLibrary() {
+    //LicenseRegistry.reset();
+    LicenseRegistry.addLicense(() async* {
+      yield const LicenseEntryWithLineBreaks(<String>['ACustomLibrary'], '''
+  CopyLeft sanjibsinha.com. No rights reserved.
+  
+     * You can redistribute code and use anywhere without my permission
+  because this code is open source.
+   
+  THIS SOFTWARE IS PROVIDED FOR EDUCATIONAL PURPOSE''');
+    });
   }
 
   @override
@@ -88,22 +108,33 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(50.00),
-          child: ElevatedButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.resolveWith(fetchColor),
-            ),
-            onPressed: () {},
-            child: const Text(
-              'An Elevated Button',
-              style: TextStyle(
-                fontFamily: 'Salsa',
-                fontSize: 30.00,
-                fontWeight: FontWeight.bold,
-              ),
+        child: OutlinedButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.resolveWith(fetchColor),
+          ),
+          child: const Text(
+            'Display About Dialog Example',
+            style: TextStyle(
+              fontFamily: 'Salsa',
+              fontSize: 30.00,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          onPressed: () {
+            showAboutDialog(
+              context: context,
+              applicationIcon: const FlutterLogo(),
+              applicationName: 'sanjibsinha.com App',
+              applicationVersion: '0.0.1',
+              applicationLegalese: '2022 sanjisinha.com',
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text('This is an about dialog in Flutter'),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
