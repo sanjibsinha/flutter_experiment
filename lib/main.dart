@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'About Dialog Example';
+  static const String _title = 'Inkwell Example';
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         // WE can define the default brightness and colors.
         brightness: Brightness.light,
         primaryColor: Colors.redAccent[600],
-        backgroundColor: Colors.black26,
+        backgroundColor: Colors.red,
         cardColor: Colors.amber,
         shadowColor: Colors.black,
         appBarTheme: const AppBarTheme(
@@ -66,36 +65,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    initMyLibrary();
-  }
-
-  Color fetchColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.redAccent;
-    }
-    return Colors.deepPurple;
-  }
-
-  void initMyLibrary() {
-    //LicenseRegistry.reset();
-    LicenseRegistry.addLicense(() async* {
-      yield const LicenseEntryWithLineBreaks(<String>['ACustomLibrary'], '''
-  CopyLeft sanjibsinha.com. No rights reserved.
-  
-     * You can redistribute code and use anywhere without my permission
-  because this code is open source.
-   
-  THIS SOFTWARE IS PROVIDED FOR EDUCATIONAL PURPOSE''');
-    });
-  }
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -108,33 +78,30 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: OutlinedButton(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.resolveWith(fetchColor),
+        child: Container(
+          margin: const EdgeInsets.all(50.00),
+          child: Column(
+            children: [
+              InkWell(
+                splashColor: Theme.of(context).backgroundColor,
+                highlightColor: Theme.of(context).cardColor,
+                child: const Icon(Icons.cabin_outlined, size: 160),
+                onTap: () {
+                  setState(() {
+                    _count += 1;
+                  });
+                },
+              ),
+              Text(
+                _count.toString(),
+                style: const TextStyle(
+                  fontFamily: 'Salsa',
+                  fontSize: 130.00,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-          child: const Text(
-            'Display About Dialog Example',
-            style: TextStyle(
-              fontFamily: 'Salsa',
-              fontSize: 30.00,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onPressed: () {
-            showAboutDialog(
-              context: context,
-              applicationIcon: const FlutterLogo(),
-              applicationName: 'sanjibsinha.com App',
-              applicationVersion: '0.0.1',
-              applicationLegalese: '2022 sanjisinha.com',
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Text('This is an about dialog in Flutter'),
-                )
-              ],
-            );
-          },
         ),
       ),
     );
