@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Inkwell Example';
+  static const String _title = 'InkResponse Example';
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
           margin: const EdgeInsets.all(50.00),
           child: Column(
             children: [
-              InkWell(
+              InkResponse(
                 splashColor: Theme.of(context).backgroundColor,
-                highlightColor: Theme.of(context).cardColor,
+                highlightColor: Theme.of(context).cardColor.withOpacity(0.10),
                 child: const Icon(Icons.cabin_outlined, size: 160),
                 onTap: () {
                   setState(() {
