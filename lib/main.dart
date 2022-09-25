@@ -5,7 +5,9 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'InkResponse Example';
+  static const String _title = 'Ink Class Example';
+  static const ImageProvider _image = NetworkImage(
+      'https://cdn.pixabay.com/photo/2022/09/19/02/14/arctic-fox-7464356_960_720.jpg');
 
   @override
   Widget build(BuildContext context) {
@@ -48,25 +50,23 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyHomePage(
-        title: _title,
-      ),
+      home: const MyHomePage(title: _title, image: _image),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title, required this.image})
+      : super(key: key);
 
   final String title;
+  final ImageProvider image;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _count = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,29 +78,27 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(50.00),
-          child: Column(
-            children: [
-              InkResponse(
-                splashColor: Theme.of(context).backgroundColor,
-                highlightColor: Theme.of(context).cardColor.withOpacity(0.10),
-                child: const Icon(Icons.cabin_outlined, size: 160),
-                onTap: () {
-                  setState(() {
-                    _count += 1;
-                  });
-                },
-              ),
-              Text(
-                _count.toString(),
-                style: const TextStyle(
-                  fontFamily: 'Salsa',
-                  fontSize: 130.00,
-                  fontWeight: FontWeight.bold,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Material(
+            child: Ink.image(
+              fit: BoxFit.fill,
+              width: 400,
+              height: 300,
+              image: widget.image,
+              child: InkWell(
+                onTap: () {/* we can navigate */},
+                child: Align(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'WHITE VULPES',
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
