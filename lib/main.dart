@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Ink Class Example';
+  static const String _title = 'AboutListTile Class Example';
   static const ImageProvider _image = NetworkImage(
       'https://cdn.pixabay.com/photo/2022/09/19/02/14/arctic-fox-7464356_960_720.jpg');
 
@@ -69,6 +69,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final List<Widget> warChildren = <Widget>[
+      const SizedBox(height: 24),
+      RichText(
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+                style: Theme.of(context).textTheme.headline1,
+                text: 'Say NO to WAR'),
+            TextSpan(style: Theme.of(context).textTheme.headline3, text: '.'),
+          ],
+        ),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -76,6 +89,20 @@ class _MyHomePageState extends State<MyHomePage> {
           style: Theme.of(context).textTheme.headline6,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: AboutListTile(
+              icon: const Icon(Icons.info),
+              applicationIcon: const FlutterLogo(),
+              applicationName: 'About War',
+              applicationVersion: 'War is Crime',
+              applicationLegalese: 'NO War, We want peace',
+              aboutBoxChildren: warChildren,
+            ),
+          ),
+        ),
       ),
       body: Center(
         child: ClipRRect(
@@ -87,13 +114,22 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 300,
               image: widget.image,
               child: InkWell(
-                onTap: () {/* we can navigate */},
+                onTap: () {
+                  showAboutDialog(
+                    context: context,
+                    applicationIcon: const FlutterLogo(),
+                    applicationName: 'About War',
+                    applicationVersion: 'War is Crime',
+                    applicationLegalese: 'NO War, We want peace',
+                    children: warChildren,
+                  );
+                },
                 child: Align(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      'WHITE VULPES',
-                      style: Theme.of(context).textTheme.headline2,
+                      'NO War',
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                 ),
