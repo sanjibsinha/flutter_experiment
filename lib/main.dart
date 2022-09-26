@@ -94,11 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: SingleChildScrollView(
           child: SafeArea(
             child: AboutListTile(
-              icon: const Icon(Icons.info),
-              applicationIcon: const FlutterLogo(),
-              applicationName: 'About War',
+              applicationName: 'No War',
               applicationVersion: 'War is Crime',
-              applicationLegalese: 'NO War, We want peace',
+              applicationLegalese: 'NO War, We Want Peace',
               aboutBoxChildren: warChildren,
             ),
           ),
@@ -117,10 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   showAboutDialog(
                     context: context,
-                    applicationIcon: const FlutterLogo(),
-                    applicationName: 'About War',
+                    applicationName: 'No War',
                     applicationVersion: 'War is Crime',
-                    applicationLegalese: 'NO War, We want peace',
+                    applicationLegalese: 'NO War, We Want Peace',
                     children: warChildren,
                   );
                 },
