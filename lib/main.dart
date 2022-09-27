@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // WE can define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: Colors.redAccent[600],
-        backgroundColor: Colors.red[900],
+        primaryColor: Colors.red[900],
+        backgroundColor: Colors.blue[900],
         cardColor: Colors.lightGreen[200],
         shadowColor: Colors.black,
         appBarTheme: const AppBarTheme(
@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontFamily: 'Salsa',
-            fontSize: 80.00,
+            fontSize: 30.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-            color: Colors.redAccent,
+            color: Colors.black,
           ),
           headline2: TextStyle(
             fontFamily: 'Salsa',
@@ -40,11 +40,9 @@ class MyApp extends StatelessWidget {
             color: Colors.purpleAccent,
           ),
           headline3: TextStyle(
-            fontFamily: 'Salsa',
             fontSize: 20.00,
-            fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-            color: Colors.deepOrange,
+            color: Colors.black45,
           ),
         ),
       ),
@@ -77,6 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListTileTheme(
             dense: false,
             style: ListTileStyle.list,
+
+            /// text color  is no longer controlled by List Tile Theme
             textColor: Theme.of(context).primaryColorDark,
             child: ListView(
               children: <Widget>[
@@ -85,8 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: Image.network(
                       'https://cdn.pixabay.com/photo/2022/09/19/02/14/arctic-fox-7464356_960_720.jpg',
                     ),
-                    title: const Text('Lovely Planet'),
-                    subtitle: const Text('Where is the soure Code?'),
+                    title: Text(
+                      'Lovely Planet',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                    subtitle: Text(
+                      'Where is the soure Code?',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
                     trailing: const Icon(Icons.more_vert),
                   ),
                 ),
@@ -95,8 +101,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: Image.network(
                       'https://cdn.pixabay.com/photo/2022/09/23/09/26/seagull-7474057_960_720.jpg',
                     ),
-                    title: const Text('Lovely Planet'),
-                    subtitle: const Text('Where is the soure Code?'),
+                    title: Text(
+                      'Lovely Planet',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                    subtitle: Text(
+                      'Where is the soure Code?',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
                     trailing: const Icon(Icons.more_vert),
                   ),
                 ),
@@ -105,8 +117,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: Image.network(
                       'https://cdn.pixabay.com/photo/2014/12/12/19/45/lion-565820_960_720.jpg',
                     ),
-                    title: const Text('Lovely Planet'),
-                    subtitle: const Text('Where is the soure Code?'),
+                    title: Text(
+                      'Lovely Planet',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                    subtitle: Text(
+                      'Where is the soure Code?',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
                     trailing: const Icon(Icons.more_vert),
                   ),
                 ),
