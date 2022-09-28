@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -94,6 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     trailing: const Icon(Icons.more_vert),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MyWidget(),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Card(
@@ -130,6 +139,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             )),
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Second Page',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      ),
+      body: Container(
+        margin: const EdgeInsets.all(30.00),
+        child: Text(
+          'Second Page',
+          style: Theme.of(context).textTheme.headline1,
+        ),
       ),
     );
   }
