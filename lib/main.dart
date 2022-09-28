@@ -73,8 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: Center(
-        child: ListTileTheme(
+      body: AbsorbPointer(
+        absorbing: true,
+        child: Center(
+          child: ListTileTheme(
             dense: false,
             style: ListTileStyle.list,
 
@@ -119,6 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     trailing: const Icon(Icons.more_vert),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MyWidget(),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Card(
@@ -135,10 +144,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     trailing: const Icon(Icons.more_vert),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MyWidget(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }
