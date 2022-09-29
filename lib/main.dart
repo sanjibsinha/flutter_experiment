@@ -63,18 +63,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool ignoring = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: Theme.of(context).textTheme.headline6,
+        title: OutlinedButton(
+          onPressed: () {
+            setState(() {
+              ignoring = !ignoring;
+            });
+          },
+          child: Text(
+            'Make Interaction False',
+            style: Theme.of(context).textTheme.headline1,
+          ),
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: AbsorbPointer(
-        absorbing: true,
+      body: IgnorePointer(
+        ignoring: ignoring,
         child: Center(
           child: ListTileTheme(
             dense: false,
