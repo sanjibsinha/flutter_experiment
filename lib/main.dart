@@ -68,18 +68,24 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: OutlinedButton(
-          onPressed: () {
-            setState(() {
-              ignoring = !ignoring;
-            });
-          },
-          child: Text(
-            'Make Interaction False',
-            style: Theme.of(context).textTheme.headline1,
-          ),
+        title: Text(
+          'Action Class Flutter',
+          style: Theme.of(context).textTheme.headline3,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        actions: [
+          OutlinedButton(
+            onPressed: () {
+              setState(() {
+                ignoring = !ignoring;
+              });
+            },
+            child: Text(
+              'Make Interaction False',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ),
+        ],
       ),
       body: IgnorePointer(
         ignoring: ignoring,
