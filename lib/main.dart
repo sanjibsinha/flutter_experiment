@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: _title,
       theme: ThemeData(
         // WE can define the default brightness and colors.
+        useMaterial3: true,
         brightness: Brightness.light,
         primaryColor: Colors.red[900],
         backgroundColor: Colors.blue[900],
