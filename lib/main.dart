@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       theme: ThemeData(
         // WE can define the default brightness and colors.
@@ -41,9 +42,11 @@ class MyApp extends StatelessWidget {
             color: Colors.purpleAccent,
           ),
           headline3: TextStyle(
+            fontFamily: 'Salsa',
             fontSize: 20.00,
             height: 2.0, // 200% of actual height
-            color: Colors.black45,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
       ),
@@ -68,22 +71,26 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Action Class Flutter',
+          'Action Chip',
           style: Theme.of(context).textTheme.headline3,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
-          OutlinedButton(
+          ActionChip(
+            avatar: CircleAvatar(
+              backgroundColor: Theme.of(context).primaryColor,
+              child: const Text('C'),
+            ),
+            label: Text(
+              'Click! Page won\'t Interact!',
+              style: Theme.of(context).textTheme.headline3,
+            ),
             onPressed: () {
               setState(() {
                 ignoring = !ignoring;
               });
             },
-            child: Text(
-              'Make Interaction False',
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          ),
+          )
         ],
       ),
       body: IgnorePointer(
