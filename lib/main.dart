@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'ListTile Color Example';
+  static const String _title = 'Align Example';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Colors.red[900],
         backgroundColor: Colors.blue[900],
-        cardColor: Colors.lightGreen[200],
+        cardColor: Colors.green[900],
         shadowColor: Colors.black,
         appBarTheme: const AppBarTheme(
           color: Colors.amberAccent,
@@ -32,14 +32,14 @@ class MyApp extends StatelessWidget {
             fontSize: 30.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-            color: Colors.black,
+            color: Colors.white,
           ),
           headline2: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
             height: 1.5, // 150% of actual height
-            color: Colors.purpleAccent,
+            color: Colors.purple,
           ),
           headline3: TextStyle(
             fontFamily: 'Salsa',
@@ -96,87 +96,52 @@ class _MyHomePageState extends State<MyHomePage> {
       body: IgnorePointer(
         ignoring: ignoring,
         child: Center(
-          child: ListTileTheme(
-            dense: false,
-            style: ListTileStyle.list,
-
-            /// text color  is no longer controlled by List Tile Theme
-            textColor: Theme.of(context).primaryColorDark,
             child: ListView(
-              children: <Widget>[
-                Card(
-                  child: ListTile(
-                    leading: Image.network(
-                      'https://cdn.pixabay.com/photo/2022/09/19/02/14/arctic-fox-7464356_960_720.jpg',
-                    ),
-                    title: Text(
-                      'Lovely Planet',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    subtitle: Text(
-                      'Where is the soure Code?',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    trailing: const Icon(Icons.more_vert),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const MyWidget(),
-                        ),
-                      );
-                    },
+          children: [
+            Center(
+              child: Container(
+                height: 120.0,
+                width: 120.0,
+                color: Theme.of(context).cardColor,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    'HI...',
+                    style: Theme.of(context).textTheme.headline1,
                   ),
                 ),
-                Card(
-                  child: ListTile(
-                    leading: Image.network(
-                      'https://cdn.pixabay.com/photo/2022/09/23/09/26/seagull-7474057_960_720.jpg',
-                    ),
-                    title: Text(
-                      'Lovely Planet',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    subtitle: Text(
-                      'Where is the soure Code?',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    trailing: const Icon(Icons.more_vert),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const MyWidget(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    leading: Image.network(
-                      'https://cdn.pixabay.com/photo/2014/12/12/19/45/lion-565820_960_720.jpg',
-                    ),
-                    title: Text(
-                      'Lovely Planet',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    subtitle: Text(
-                      'Where is the soure Code?',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    trailing: const Icon(Icons.more_vert),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const MyWidget(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+            Center(
+              child: Container(
+                height: 120.0,
+                width: 120.0,
+                color: Theme.of(context).backgroundColor,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'HOW...',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                height: 120.0,
+                width: 120.0,
+                color: Theme.of(context).primaryColor,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'ARE U?',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }
