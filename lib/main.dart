@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Align Example';
+  static const String _title = 'BackButton Example';
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.light,
         primaryColor: Colors.red[900],
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blue[50],
         cardColor: Colors.green[900],
         shadowColor: Colors.black,
         appBarTheme: const AppBarTheme(
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Action Chip',
+          'BackButton Example',
           style: Theme.of(context).textTheme.headline3,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -93,55 +94,62 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: IgnorePointer(
-        ignoring: ignoring,
-        child: Center(
-            child: ListView(
+      body: Center(
+        child: Column(
           children: [
-            Center(
-              child: Container(
-                height: 120.0,
-                width: 120.0,
-                color: Theme.of(context).cardColor,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    'HI...',
-                    style: Theme.of(context).textTheme.headline1,
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              //color: Colors.red,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amberAccent),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyWidget()),
+                  );
+                },
+                child: Text(
+                  'Next Page',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                height: 120.0,
-                width: 120.0,
-                color: Theme.of(context).backgroundColor,
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'HOW...',
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                ),
-              ),
+            const SizedBox(
+              height: 10.00,
             ),
-            Center(
-              child: Container(
-                height: 120.0,
-                width: 120.0,
-                color: Theme.of(context).primaryColor,
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    'ARE U?',
-                    style: Theme.of(context).textTheme.headline1,
+            Container(
+              margin: const EdgeInsets.all(20.00),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  shadowColor: Colors.black,
+                  elevation: 20.00,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyWidget()),
+                  );
+                },
+                child: Text(
+                  'Next Page',
+                  style: GoogleFonts.salsa(
+                    fontSize: 25.00,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
             ),
           ],
-        )),
+        ),
       ),
     );
   }
@@ -160,12 +168,32 @@ class MyWidget extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: Container(
-        margin: const EdgeInsets.all(30.00),
-        child: Text(
-          'Second Page',
-          style: Theme.of(context).textTheme.headline1,
-        ),
+      body: Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(30.00),
+            child: Text(
+              'Back to First Page',
+              style: GoogleFonts.salsa(
+                fontSize: 25.00,
+                fontWeight: FontWeight.bold,
+                color: Colors.redAccent,
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(30.00),
+            width: 70.00,
+            height: 70.00,
+            color: Theme.of(context).backgroundColor,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+        ],
       ),
     );
   }
