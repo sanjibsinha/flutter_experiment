@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'BackButton Example';
+  static const String _title = 'IconButton Example';
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +27,27 @@ class MyApp extends StatelessWidget {
 
         // WE can define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 30.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-            color: Colors.white,
+            color: Colors.red[900],
           ),
           headline2: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 25.00,
             fontWeight: FontWeight.bold,
             height: 1.5, // 150% of actual height
-            color: Colors.purple,
+            color: Colors.purple[600],
           ),
           headline3: TextStyle(
             fontFamily: 'Salsa',
             fontSize: 20.00,
             height: 2.0, // 200% of actual height
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.blue[300],
           ),
         ),
       ),
@@ -55,6 +55,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+double add = 0.00;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -66,85 +68,36 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool ignoring = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'BackButton Example',
-          style: Theme.of(context).textTheme.headline3,
+          'IconButton Example',
+          style: Theme.of(context).textTheme.headline2,
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
-          ActionChip(
-            avatar: CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              child: const Text('C'),
-            ),
-            label: Text(
-              'Click! Page won\'t Interact!',
-              style: Theme.of(context).textTheme.headline3,
-            ),
+          IconButton(
+            tooltip: 'Add to increase.',
             onPressed: () {
               setState(() {
-                ignoring = !ignoring;
+                add += 100;
               });
             },
-          )
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: Center(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              //color: Colors.red,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.amberAccent),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyWidget()),
-                  );
-                },
+            Center(
+              child: Container(
+                margin: const EdgeInsets.all(30.00),
                 child: Text(
-                  'Next Page',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10.00,
-            ),
-            Container(
-              margin: const EdgeInsets.all(20.00),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  shadowColor: Colors.black,
-                  elevation: 20.00,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyWidget()),
-                  );
-                },
-                child: Text(
-                  'Next Page',
-                  style: GoogleFonts.salsa(
-                    fontSize: 25.00,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                  '$add',
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
             ),
