@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'IconButton Example';
+  static const String _title = 'AppBarTheme One Example';
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,15 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.blue[50],
         cardColor: Colors.green[900],
         shadowColor: Colors.black,
-        appBarTheme: const AppBarTheme(
-          color: Colors.amberAccent,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.yellow[600],
+          // This will be applied to the "back" icon
+          iconTheme: IconThemeData(color: Colors.red[900]),
+          // This will be applied to the action icon buttons that locates on the right side
+          actionsIconTheme: IconThemeData(color: Colors.red[500]),
+          centerTitle: false,
+          elevation: 15,
+          titleTextStyle: TextStyle(color: Colors.indigo[600]),
         ),
 
         // WE can define the default `TextTheme`. Use this to specify the default
@@ -72,11 +79,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'IconButton Example',
-          style: Theme.of(context).textTheme.headline2,
+        title: const Text(
+          'AppBarTheme One Example',
+          style: TextStyle(
+            fontFamily: 'Salsa',
+            fontSize: 30.00,
+            fontWeight: FontWeight.bold,
+            height: 2.0, // 200% of actual height
+          ),
         ),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
           IconButton(
             tooltip: 'Add to increase.',
