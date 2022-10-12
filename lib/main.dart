@@ -6,57 +6,34 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'AppBarTheme One Example';
+  static const String _title = 'AppBarTheme Second Example';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
-      theme: ThemeData(
-        // WE can define the default brightness and colors.
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primaryColor: Colors.red[900],
-        backgroundColor: Colors.blue[50],
-        cardColor: Colors.green[900],
-        shadowColor: Colors.black,
+      theme: Theme.of(context).copyWith(
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.yellow[600],
-          // This will be applied to the "back" icon
-          iconTheme: IconThemeData(color: Colors.red[900]),
-          // This will be applied to the action icon buttons that locates on the right side
-          actionsIconTheme: IconThemeData(color: Colors.red[500]),
-          centerTitle: false,
-          elevation: 15,
-          titleTextStyle: TextStyle(color: Colors.indigo[600]),
-        ),
-
-        // WE can define the default `TextTheme`. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-          headline1: TextStyle(
+          backgroundColor: Colors.red[900],
+          foregroundColor: Colors.yellow[600],
+          elevation: 20.00,
+          shadowColor: Colors.black,
+          centerTitle: true,
+          titleTextStyle: const TextStyle(
             fontFamily: 'Salsa',
+            color: Colors.white,
             fontSize: 30.00,
             fontWeight: FontWeight.bold,
             height: 2.0, // 200% of actual height
-            color: Colors.red[900],
-          ),
-          headline2: TextStyle(
-            fontFamily: 'Salsa',
-            fontSize: 25.00,
-            fontWeight: FontWeight.bold,
-            height: 1.5, // 150% of actual height
-            color: Colors.purple[600],
-          ),
-          headline3: TextStyle(
-            fontFamily: 'Salsa',
-            fontSize: 20.00,
-            height: 2.0, // 200% of actual height
-            fontWeight: FontWeight.bold,
-            color: Colors.blue[300],
           ),
         ),
+        primaryColor: Colors.amber,
+        primaryIconTheme:
+            Theme.of(context).primaryIconTheme.copyWith(color: Colors.red),
+        primaryTextTheme:
+            Theme.of(context).primaryTextTheme.apply(bodyColor: Colors.green),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.amber),
       ),
       home: const MyHomePage(title: _title),
     );
@@ -81,13 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'AppBarTheme One Example',
-          style: TextStyle(
-            fontFamily: 'Salsa',
-            fontSize: 30.00,
-            fontWeight: FontWeight.bold,
-            height: 2.0, // 200% of actual height
-          ),
+          'AppBarTheme second Example',
         ),
         actions: [
           IconButton(
