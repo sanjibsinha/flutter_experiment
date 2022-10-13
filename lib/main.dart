@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'AppBarTheme Second Example';
+  static const String _title = 'Aspect Ratio Example';
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'AppBarTheme second Example',
+          'Aspect Ratio Example',
         ),
         actions: [
           IconButton(
@@ -75,12 +75,52 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-            Center(
-              child: Container(
-                margin: const EdgeInsets.all(30.00),
-                child: Text(
-                  '$add',
-                  style: Theme.of(context).textTheme.headline1,
+            const SizedBox(
+              height: 10.00,
+            ),
+            Container(
+              color: Colors.red[900],
+              alignment: Alignment.center,
+              width: 100.0,
+              height: 100.0,
+              child: AspectRatio(
+                aspectRatio: 2.04,
+                child: Container(
+                  color: Colors.yellow[500],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10.00,
+            ),
+            Container(
+              color: Colors.black45,
+              alignment: Alignment.center,
+              width: 100.0,
+              height: 100.0,
+              child: AspectRatio(
+                aspectRatio: 1.3,
+                child: Container(
+                  width: 100.0,
+                  height: 50.0,
+                  color: Colors.red[300],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10.00,
+            ),
+            Container(
+              color: Colors.blue[600],
+              alignment: Alignment.center,
+              width: 100.0,
+              height: 100.0,
+              child: AspectRatio(
+                aspectRatio: 0.8,
+                child: Container(
+                  width: 100.0,
+                  height: 50.0,
+                  color: Colors.green[200],
                 ),
               ),
             ),
