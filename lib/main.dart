@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Aspect Ratio Example';
+  static const String _title = 'Asset Bundle Example';
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Aspect Ratio Example',
+          'Asset Bundle Example',
         ),
         actions: [
           IconButton(
@@ -79,97 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 10.00,
             ),
             Container(
-              color: Colors.red[900],
               alignment: Alignment.center,
-              width: 100.0,
-              height: 100.0,
-              child: AspectRatio(
-                aspectRatio: 2.04,
-                child: Container(
-                  color: Colors.yellow[500],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10.00,
-            ),
-            Container(
-              color: Colors.black45,
-              alignment: Alignment.center,
-              width: 100.0,
-              height: 100.0,
-              child: AspectRatio(
-                aspectRatio: 1.3,
-                child: Container(
-                  width: 100.0,
-                  height: 50.0,
-                  color: Colors.red[300],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10.00,
-            ),
-            Container(
-              color: Colors.blue[600],
-              alignment: Alignment.center,
-              width: 100.0,
-              height: 100.0,
-              child: AspectRatio(
-                aspectRatio: 0.8,
-                child: Container(
-                  width: 100.0,
-                  height: 50.0,
-                  color: Colors.green[200],
-                ),
-              ),
+              width: 200.0,
+              height: 200.0,
+              child: const Image(image: AssetImage('images/ss.webp')),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Second Page',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-      ),
-      body: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(30.00),
-            child: Text(
-              'Back to First Page',
-              style: GoogleFonts.salsa(
-                fontSize: 25.00,
-                fontWeight: FontWeight.bold,
-                color: Colors.redAccent,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(30.00),
-            width: 70.00,
-            height: 70.00,
-            color: Theme.of(context).backgroundColor,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-        ],
       ),
     );
   }

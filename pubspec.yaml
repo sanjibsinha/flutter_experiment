@@ -28,6 +28,8 @@ dev_dependencies:
 
 
 flutter:
+  assets:
+   - images/ss.webp
 
   
   uses-material-design: true
@@ -37,6 +39,7 @@ flutter:
     - family: Salsa
       fonts:
         - asset: fonts/Salsa-Regular.ttf
+  
         
     
   
