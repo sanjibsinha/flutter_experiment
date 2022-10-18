@@ -7,8 +7,9 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-/// this is ImageFiltered Widget
-/// 
+
+  /// this is ImageFiltered Widget
+  ///
   static const String _title = 'Image Filtered Example';
 
   @override
@@ -81,34 +82,22 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 10.00,
             ),
-            ImageFiltered(
-              imageFilter: ImageFilter.blur(
-                sigmaX: 2.0,
-                sigmaY: 2.0,
-              ),
-              child: Container(
-                alignment: Alignment.center,
-                width: 200.0,
-                height: 200.0,
-                child: const Image(image: AssetImage('images/ss.webp')),
-              ),
+            Container(
+              alignment: Alignment.center,
+              width: 200.0,
+              height: 200.0,
+              child: const Image(image: AssetImage('images/ss.webp')),
             ),
-            ImageFiltered(
-              imageFilter: ImageFilter.blur(
-                sigmaX: 3.0,
-                sigmaY: 3.0,
-              ),
-              child: Container(
-                alignment: Alignment.center,
-                width: 200.0,
-                height: 200.0,
-                child: Text(
-                  'Hello World',
-                  style: GoogleFonts.salsa(
-                    fontSize: 55.00,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent,
-                  ),
+            Container(
+              alignment: Alignment.center,
+              width: 200.0,
+              height: 200.0,
+              child: Text(
+                'Hello World',
+                style: GoogleFonts.salsa(
+                  fontSize: 55.00,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
                 ),
               ),
             ),
