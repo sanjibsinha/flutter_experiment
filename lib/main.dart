@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   /// this is ImageFiltered Widget
   ///
-  static const String _title = 'Image Filtered Example';
+  static const String _title = 'Material Banner Example';
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Image Filtered Example',
+          'Material Banner Example',
         ),
         actions: [
           IconButton(
@@ -82,24 +80,40 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 10.00,
             ),
-            Container(
-              alignment: Alignment.center,
-              width: 200.0,
-              height: 200.0,
-              child: const Image(image: AssetImage('images/ss.webp')),
-            ),
-            Container(
-              alignment: Alignment.center,
-              width: 200.0,
-              height: 200.0,
-              child: Text(
-                'Hello World',
+            MaterialBanner(
+              content: Text(
+                'Message Text',
                 style: GoogleFonts.salsa(
-                  fontSize: 55.00,
+                  fontSize: 15.00,
                   fontWeight: FontWeight.bold,
-                  color: Colors.redAccent,
+                  color: Colors.green[300],
                 ),
               ),
+              leading: const CircleAvatar(child: Icon(Icons.mail_rounded)),
+              actions: [
+                TextButton(
+                  child: Text(
+                    'READ',
+                    style: GoogleFonts.salsa(
+                      fontSize: 20.00,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[500],
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+                TextButton(
+                  child: Text(
+                    'DELETE',
+                    style: GoogleFonts.salsa(
+                      fontSize: 20.00,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+              ],
             ),
           ],
         ),
