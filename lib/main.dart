@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   /// this is ImageFiltered Widget
   ///
-  static const String _title = 'Material Banner Example';
+  static const String _title = 'EdgeInsets Example';
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Material Banner Example',
+          'EdgeInsets Example',
         ),
         actions: [
           IconButton(
@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: () {},
                 ),
+                ignoreText(),
                 TextButton(
                   child: Text(
                     'DELETE',
@@ -123,4 +124,26 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Widget ignoreText() {
+  return Padding(
+    padding: const EdgeInsets.only(
+      left: 40,
+      top: 20,
+      right: 40,
+      bottom: 20,
+    ),
+    child: TextButton(
+      child: Text(
+        'IGNORE',
+        style: GoogleFonts.salsa(
+          fontSize: 20.00,
+          fontWeight: FontWeight.bold,
+          color: Colors.redAccent,
+        ),
+      ),
+      onPressed: () {},
+    ),
+  );
 }
